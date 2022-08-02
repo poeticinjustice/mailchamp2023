@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Mailchimp stat retriever",
   "main": "server.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
