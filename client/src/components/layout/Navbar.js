@@ -3,10 +3,14 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import AuthContext from '../../context/auth/authContext'
 
-const Navbar = ({ title, icon }) => {
+// For use when icon and user are active
+// const Navbar = ({ title, icon }) => {
+// const { isAuthenticated, logout, user } = authContext
+
+const Navbar = ({ title }) => {
   const authContext = useContext(AuthContext)
 
-  const { isAuthenticated, logout, user } = authContext
+  const { isAuthenticated, logout } = authContext
 
   const onLogout = () => {
     logout()
@@ -14,7 +18,7 @@ const Navbar = ({ title, icon }) => {
 
   const authLinks = (
     <Fragment>
-      <li>Hello {user && user.name}</li>
+      {/* <li>Hello {user && user.name}</li> */}
       <li>
         <Link to='/updating'>Updating</Link>
       </li>

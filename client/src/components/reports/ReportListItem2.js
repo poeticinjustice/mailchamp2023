@@ -5,27 +5,38 @@ import { Link } from 'react-router-dom'
 const ReportListItem2 = ({
   report: { id, campaign_title, subject_line, send_time, emails_sent, clicks },
 }) => {
-  const sendDate = new Date(send_time).toDateString()
-  const sendTime = new Date(send_time).toLocaleTimeString('EDT')
+  const sendDate2 = new Date(send_time).toLocaleDateString()
 
-  return (
-    <Fragment>
+  // const sendDate = new Date(send_time).toDateString()
+  // const sendTime = new Date(send_time).toLocaleTimeString('EDT')
+
+  if (emails_sent > 0) {
+    return (
+      <Fragment>
+        <tr>
+          <td>{campaign_title}</td>
+          <td>{subject_line}</td>
+          <td>
+            {sendDate2}
+            {/* {sendDate} at {sendTime} */}
+          </td>
+          <td>{emails_sent.toLocaleString()}</td>
+          <td>{clicks.clicks_total}</td>
+          <td>
+            <Link to={`/report2/${id}`} className='btn btn-dark btn-sm my-1'>
+              Report2
+            </Link>
+          </td>
+        </tr>
+      </Fragment>
+    )
+  } else {
+    return (
       <tr>
-        <td>{campaign_title}</td>
-        <td>{subject_line}</td>
-        <td>
-          {sendDate} at {sendTime}
-        </td>
-        <td>{emails_sent.toLocaleString()}</td>
-        <td>{clicks.clicks_total}</td>
-        <td>
-          <Link to={`/report/${id}`} className='btn btn-dark btn-sm my-1'>
-            Get Report
-          </Link>
-        </td>
+        <td></td>
       </tr>
-    </Fragment>
-  )
+    )
+  }
 }
 
 ReportListItem2.propTypes = {

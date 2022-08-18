@@ -203,7 +203,7 @@ const Report2 = ({ match }) => {
       <table>
         <thead>
           <tr>
-            <td style={tdStyle3}>xx</td>
+            <th style={tdStyle3}>URL</th>
             <th style={tdStyle4}>Total Clicks</th>
           </tr>
         </thead>

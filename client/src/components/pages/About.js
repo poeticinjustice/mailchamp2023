@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const About = () => {
   return (
@@ -6,10 +6,10 @@ const About = () => {
       <h1>About this app</h1>
       <p className='my-1'>Get yer MailChimp stats</p>
       <p className='bg-dark p'>
-        <strong>Version 0.6</strong>
+        <strong>Version 0.7</strong>
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default About;
+export default About
