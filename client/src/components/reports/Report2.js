@@ -97,14 +97,20 @@ const Report2 = ({ match }) => {
 
   var data = urlsClicked.urls_clicked,
     combined = (function (array) {
+      let lsa = 'http://www.lightingandsoundamerica.com/'
       var r = []
       array.forEach(function (a, i) {
+        // console.log(a.url)
         if (!this[a.url]) {
           this[a.url] = { url: a.url, total_clicks: 0 }
-          r.push(this[a.url])
+          console.log(a.url)
+          if (a.url !== lsa) {
+            r.push(this[a.url])
+          }
         }
         this[a.url].total_clicks += a.total_clicks
       }, {})
+
       return r
     })(data)
 
@@ -172,12 +178,14 @@ const Report2 = ({ match }) => {
       <br />
       <br />
       <table>
-        <tr>
-          <td style={tdStyle1}>
-            {subject_line}: Lighting&amp;Sound America Marketing Campaign;{' '}
-            {formattedDate}
-          </td>
-        </tr>
+        <tbody>
+          <tr>
+            <td style={tdStyle1}>
+              {subject_line}: Lighting&amp;Sound America Marketing Campaign;{' '}
+              {formattedDate}
+            </td>
+          </tr>
+        </tbody>
       </table>
       <table>
         <tbody>
@@ -203,7 +211,7 @@ const Report2 = ({ match }) => {
       <table>
         <thead>
           <tr>
-            <th style={tdStyle3}>URL</th>
+            <td style={tdStyle3}>xx</td>
             <th style={tdStyle4}>Total Clicks</th>
           </tr>
         </thead>
