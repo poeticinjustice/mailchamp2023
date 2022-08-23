@@ -87,45 +87,51 @@ const Report2 = ({ match }) => {
   }
 
   if (loading || !report.clicks || !urlsClicked.urls_clicked) return <Spinner />
-
-  let clicks_total = report.clicks.clicks_total
+  let lsa = 'http://www.lightingandsoundamerica.com/'
+  let plasaMedia = 'http://www.plasa.org/media/'
   let unique_opens = report.opens.unique_opens
-  let click_percent = ((clicks_total / unique_opens) * 100).toFixed(2)
   let open_percent = ((unique_opens / emails_sent) * 100).toFixed(2)
   let reportLink = `https://us19.admin.mailchimp.com/reports/summary?id=${web_id}`
   let unsubscribedLink = `https://us19.admin.mailchimp.com/reports/activity/unsubscribed?id=${web_id}`
 
-  var data = urlsClicked.urls_clicked,
+  let data = urlsClicked.urls_clicked,
     combined = (function (array) {
-      let lsa = 'http://www.lightingandsoundamerica.com/'
-      var r = []
+      let r = []
       array.forEach(function (a, i) {
-        // console.log(a.url)
         if (!this[a.url]) {
-          this[a.url] = { url: a.url, total_clicks: 0 }
-          console.log(a.url)
-          if (a.url !== lsa) {
+          this[a.url] = { url: a.url, total_clicks: a.total_clicks }
+          if (a.url !== lsa && a.url !== plasaMedia) {
             r.push(this[a.url])
           }
         }
-        this[a.url].total_clicks += a.total_clicks
+
+        // this[a.url].total_clicks += a.total_clicks
       }, {})
 
       return r
     })(data)
 
+  const updated_clicks = data
+    .filter(({ url }) => url !== plasaMedia && url !== lsa)
+    .reduce(
+      (total, currentValue) => (total = total + currentValue.total_clicks),
+      0
+    )
+
   combined.sort((a, b) => (a.total_clicks > b.total_clicks ? -1 : 1))
+
+  let click_percent = ((updated_clicks / unique_opens) * 100).toFixed(2)
 
   let urls = combined.map((urlClicked) => (
     <tr key={urlClicked.url}>
       <td style={tdStyle5}>
-        <a href={urlClicked.url} target='_blank' rel='noopener noreferrer'>
+        <a href={urlClicked} target='_blank' rel='noopener noreferrer'>
           {urlClicked.url}
         </a>
       </td>
       <td style={tdStyle6}>
         {urlClicked.total_clicks} (
-        {((urlClicked.total_clicks / clicks_total) * 100).toFixed(0)}%)
+        {((urlClicked.total_clicks / updated_clicks) * 100).toFixed(0)}%)
       </td>
       <td></td>
     </tr>
@@ -155,7 +161,7 @@ const Report2 = ({ match }) => {
             <td>{emails_sent.toLocaleString()}</td>
             <td>{unique_opens.toLocaleString()}</td>
             <td>{open_percent}%</td>
-            <td>{clicks_total.toLocaleString()}</td>
+            <td>{updated_clicks.toLocaleString()}</td>
             <td>{click_percent}%</td>
           </tr>
         </tbody>
@@ -200,7 +206,7 @@ const Report2 = ({ match }) => {
           </tr>
           <tr>
             <td style={tdStyle2}>Total Clicks:</td>
-            <td style={tdStyle2}>{clicks_total.toLocaleString()}</td>
+            <td style={tdStyle2}>{updated_clicks.toLocaleString()}</td>
             <td style={tdStyle2}>{click_percent}%</td>
           </tr>
           <tr>
