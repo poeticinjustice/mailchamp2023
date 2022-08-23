@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const ReportListItem2 = ({
-  report: { id, campaign_title, subject_line, send_time, emails_sent, clicks },
+  report: { id, campaign_title, subject_line, send_time, emails_sent },
 }) => {
   const sendDate2 = new Date(send_time).toLocaleDateString()
 
   // const sendDate = new Date(send_time).toDateString()
   // const sendTime = new Date(send_time).toLocaleTimeString('EDT')
 
-  if (emails_sent > 0) {
+  if (emails_sent > 11) {
     return (
       <Fragment>
         <tr>
@@ -21,21 +21,16 @@ const ReportListItem2 = ({
             {/* {sendDate} at {sendTime} */}
           </td>
           <td>{emails_sent.toLocaleString()}</td>
-          <td>{clicks.clicks_total}</td>
           <td>
             <Link to={`/report2/${id}`} className='btn btn-dark btn-sm my-1'>
-              Report2
+              Get
             </Link>
           </td>
         </tr>
       </Fragment>
     )
   } else {
-    return (
-      <tr>
-        <td></td>
-      </tr>
-    )
+    return null
   }
 }
 

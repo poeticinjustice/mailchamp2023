@@ -24,10 +24,9 @@ const Reports2 = () => {
             <tr>
               <th>Campaign Name</th>
               <th>Subject</th>
+              <th>Date</th>
               <th>Sent</th>
-              <th>Total Sent</th>
-              <th>Total Clicks</th>
-              <th>Special Report</th>
+              <th>Report</th>
             </tr>
           </thead>
           <tbody>

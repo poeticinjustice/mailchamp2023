@@ -151,7 +151,7 @@ const Report2 = ({ match }) => {
   return (
     <Fragment>
       <Link to='/updating' className='btn btn-light'>
-        Back to Report List 2
+        Back to Report List 2 (updating)
       </Link>
       <br />
       <br />
@@ -217,7 +217,7 @@ const Report2 = ({ match }) => {
       <table>
         <thead>
           <tr>
-            <td style={tdStyle3}>xx</td>
+            <td style={tdStyle3}>URL</td>
             <th style={tdStyle4}>Total Clicks</th>
           </tr>
         </thead>
