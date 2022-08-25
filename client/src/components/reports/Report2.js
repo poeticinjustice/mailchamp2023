@@ -86,26 +86,63 @@ const Report2 = ({ match }) => {
     fontSize: '100%',
   }
 
+  const tableStyle7 = {
+    borderTop: 'solid #DEDDDC 4.0pt',
+    borderBottom: 'solid #DEDDDC 4.0pt',
+  }
+
   if (loading || !report.clicks || !urlsClicked.urls_clicked) return <Spinner />
   let lsa = 'http://www.lightingandsoundamerica.com/'
   let plasaMedia = 'http://www.plasa.org/media/'
+  let clicks_total = report.clicks.clicks_total
   let unique_opens = report.opens.unique_opens
   let open_percent = ((unique_opens / emails_sent) * 100).toFixed(2)
   let reportLink = `https://us19.admin.mailchimp.com/reports/summary?id=${web_id}`
   let unsubscribedLink = `https://us19.admin.mailchimp.com/reports/activity/unsubscribed?id=${web_id}`
+
+  let data2 = urlsClicked.urls_clicked,
+    combined2 = (function (array) {
+      let r = []
+      array.forEach(function (a, i) {
+        if (!this[a.url]) {
+          this[a.url] = { url: a.url, total_clicks: 0 }
+          if (a.url === lsa || a.url === plasaMedia) {
+            r.push(this[a.url])
+          }
+        }
+
+        this[a.url].total_clicks += a.total_clicks
+      }, {})
+
+      return r
+    })(data2)
+
+  combined2.sort((a, b) => (a.total_clicks > b.total_clicks ? -1 : 1))
+
+  let urls2 = combined2.map((urlClicked) => (
+    <tr key={urlClicked.url}>
+      <td style={tdStyle5}>
+        <a href={urlClicked.url} target='_blank' rel='noopener noreferrer'>
+          {urlClicked.url}
+        </a>
+      </td>
+      <td style={tdStyle6}>{urlClicked.total_clicks}</td>
+      <td></td>
+    </tr>
+  ))
 
   let data = urlsClicked.urls_clicked,
     combined = (function (array) {
       let r = []
       array.forEach(function (a, i) {
         if (!this[a.url]) {
-          this[a.url] = { url: a.url, total_clicks: a.total_clicks }
+          this[a.url] = { url: a.url, total_clicks: 0 }
           if (a.url !== lsa && a.url !== plasaMedia) {
             r.push(this[a.url])
           }
         }
 
-        // this[a.url].total_clicks += a.total_clicks
+        this[a.url].total_clicks += a.total_clicks
       }, {})
 
       return r
@@ -125,7 +162,7 @@ const Report2 = ({ match }) => {
   let urls = combined.map((urlClicked) => (
     <tr key={urlClicked.url}>
       <td style={tdStyle5}>
-        <a href={urlClicked} target='_blank' rel='noopener noreferrer'>
+        <a href={urlClicked.url} target='_blank' rel='noopener noreferrer'>
           {urlClicked.url}
         </a>
       </td>
@@ -183,6 +220,31 @@ const Report2 = ({ match }) => {
       </div>
       <br />
       <br />
+
+      <table style={tableStyle7}>
+        <tbody>
+          <tr>
+            <td style={tdStyle5}>
+              Testing MailChimp Total clicks including LSA:
+            </td>
+            <td style={tdStyle6}>{clicks_total.toLocaleString()}</td>
+          </tr>
+          <tr>
+            <td style={tdStyle5}>
+              Testing MailChimp Total clicks excluding LSA:
+            </td>
+            <td style={tdStyle6}>{updated_clicks.toLocaleString()}</td>
+          </tr>
+          {urls2}
+        </tbody>
+      </table>
+      <table>
+        <tbody>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
       <table>
         <tbody>
           <tr>
