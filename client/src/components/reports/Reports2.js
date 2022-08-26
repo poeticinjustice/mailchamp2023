@@ -26,7 +26,8 @@ const Reports2 = () => {
               <th>Subject</th>
               <th>Date</th>
               <th>Sent</th>
-              <th>Report</th>
+              <th>No LSA</th>
+              <th>Inc LSA</th>
             </tr>
           </thead>
           <tbody>

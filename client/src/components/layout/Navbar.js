@@ -20,10 +20,10 @@ const Navbar = ({ title }) => {
     <Fragment>
       {/* <li>Hello {user && user.name}</li> */}
       <li>
-        <Link to='/updating'>Updating</Link>
+        <Link to='/updating'>Actual</Link>
       </li>
       <li>
-        <Link to='/'>Current</Link>
+        <Link to='/'>All</Link>
       </li>
       <li>
         <Link to='/about'>About</Link>

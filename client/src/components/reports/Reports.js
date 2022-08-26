@@ -1,20 +1,20 @@
-import React, { Fragment, useEffect, useContext } from 'react';
-import ReportListItem from './ReportListItem';
-import Spinner from '../layout/Spinner';
-import MailchimpContext from '../../context/mailchimp/mailchimpContext';
+import React, { Fragment, useEffect, useContext } from 'react'
+import ReportListItem from './ReportListItem'
+import Spinner from '../layout/Spinner'
+import MailchimpContext from '../../context/mailchimp/mailchimpContext'
 
 const Reports = () => {
-  const mailchimpContext = useContext(MailchimpContext);
+  const mailchimpContext = useContext(MailchimpContext)
 
-  const { loading, reports, getReports } = mailchimpContext;
+  const { loading, reports, getReports } = mailchimpContext
 
   useEffect(() => {
-    getReports();
+    getReports()
     // eslint-disable-next-line
-  }, []);
+  }, [])
 
   if (loading || !reports.reports) {
-    return <Spinner />;
+    return <Spinner />
   } else {
     return (
       <Fragment>
@@ -22,23 +22,23 @@ const Reports = () => {
           <caption></caption>
           <thead>
             <tr>
-              <th>Campaign Title</th>
-              <th>Campaign Subject</th>
-              <th>Date and Time Sent</th>
-              <th>Total Sent</th>
-              <th>Total Clicks</th>
-              <th>Get Report</th>
+              <th>Campaign Name</th>
+              <th>Subject</th>
+              <th>Date</th>
+              <th>Sent</th>
+              <th>No LSA</th>
+              <th>Inc LSA</th>
             </tr>
           </thead>
           <tbody>
-            {reports.reports.map(report => (
+            {reports.reports.map((report) => (
               <ReportListItem key={report.id} report={report} />
             ))}
           </tbody>
         </table>
       </Fragment>
-    );
+    )
   }
-};
+}
 
-export default Reports;
+export default Reports

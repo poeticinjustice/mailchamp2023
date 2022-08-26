@@ -187,9 +187,28 @@ const Report2 = ({ match }) => {
 
   return (
     <Fragment>
-      <Link to='/updating' className='btn btn-light'>
-        Back to Report List 2 (updating)
-      </Link>
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <Link to='/updating' className='btn btn-light'>
+                Back to Report List (updating)
+              </Link>
+            </td>
+            <td>
+              <Link to={`/report/${match.params.id}`} className='btn btn-light'>
+                Original Report, including LSA/PLASA
+              </Link>
+            </td>
+            <td>
+              <Link to={`/report/${match.params.id}`} className='btn btn-light'>
+                Original Report List
+              </Link>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
       <br />
       <br />
       <table>
@@ -225,14 +244,12 @@ const Report2 = ({ match }) => {
         <tbody>
           <tr>
             <td style={tdStyle5}>
-              Testing MailChimp Total clicks including LSA:
+              {`MailChimp's Total clicks (includes LSA/PLASA):`}
             </td>
             <td style={tdStyle6}>{clicks_total.toLocaleString()}</td>
           </tr>
           <tr>
-            <td style={tdStyle5}>
-              Testing MailChimp Total clicks excluding LSA:
-            </td>
+            <td style={tdStyle5}>Total clicks excluding LSA/PLASA:</td>
             <td style={tdStyle6}>{updated_clicks.toLocaleString()}</td>
           </tr>
           {urls2}
