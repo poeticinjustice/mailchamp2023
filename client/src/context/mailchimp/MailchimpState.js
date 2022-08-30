@@ -1,17 +1,17 @@
-import React, { useReducer } from 'react';
-import axios from 'axios';
-import MailchimpContext from './mailchimpContext';
-import MailchimpReducer from './mailchimpReducer';
+import React, { useReducer } from 'react'
+import axios from 'axios'
+import MailchimpContext from './mailchimpContext'
+import MailchimpReducer from './mailchimpReducer'
 import {
   GET_REPORTS,
   GET_REPORT,
   GET_CAMPAIGN,
   GET_CLICKED,
   SET_LOADING,
-  REPORTS_ERROR
-} from '../types';
+  REPORTS_ERROR,
+} from '../types'
 
-const MailchimpState = props => {
+const MailchimpState = (props) => {
   const initialState = {
     reports: {},
     campaigns: {},
@@ -19,95 +19,95 @@ const MailchimpState = props => {
     campaign: {},
     urlsClicked: {},
     error: null,
-    loading: false
-  };
+    loading: false,
+  }
 
-  const [state, dispatch] = useReducer(MailchimpReducer, initialState);
+  const [state, dispatch] = useReducer(MailchimpReducer, initialState)
 
   // Set Prod state vs Dev
   // const prodApi = process.env.MC_PROD_API;
-  const prodApi = 'https://mailchamp2019.herokuapp.com/api';
-  const devApi = 'http://localhost:5000/api';
+  const prodApi = 'https://mailchamp2022.herokuapp.com/api'
+  const devApi = 'http://localhost:5000/api'
 
-  const apiLink = process.env.NODE_ENV === 'production' ? prodApi : devApi;
+  const apiLink = process.env.NODE_ENV === 'production' ? prodApi : devApi
 
   // Get All Reports
   const getReports = async () => {
-    setLoading(true);
+    setLoading(true)
 
     try {
-      const res = await axios.get(`${apiLink}/reports`);
+      const res = await axios.get(`${apiLink}/reports`)
 
       dispatch({
         type: GET_REPORTS,
-        payload: res.data
-      });
+        payload: res.data,
+      })
     } catch (err) {
       dispatch({
         type: REPORTS_ERROR,
-        payload: 'There was an error'
-      });
+        payload: 'There was an error',
+      })
     }
-  };
+  }
 
   // Get Report (specific) ID
-  const getReport = async id => {
-    setLoading();
+  const getReport = async (id) => {
+    setLoading()
 
     try {
-      const res = await axios.get(`${apiLink}/report/${id}`);
+      const res = await axios.get(`${apiLink}/report/${id}`)
 
       dispatch({
         type: GET_REPORT,
-        payload: res.data
-      });
+        payload: res.data,
+      })
     } catch (err) {
       dispatch({
         type: REPORTS_ERROR,
-        payload: 'There was a report error'
-      });
+        payload: 'There was a report error',
+      })
     }
-  };
+  }
 
   // Get Campaign (specific) ID
-  const getCampaign = async id => {
-    setLoading();
+  const getCampaign = async (id) => {
+    setLoading()
 
     try {
-      const res = await axios.get(`${apiLink}/campaign/${id}`);
+      const res = await axios.get(`${apiLink}/campaign/${id}`)
 
       dispatch({
         type: GET_CAMPAIGN,
-        payload: res.data
-      });
+        payload: res.data,
+      })
     } catch (err) {
       dispatch({
         type: REPORTS_ERROR,
-        payload: 'There was a campaign error'
-      });
+        payload: 'There was a campaign error',
+      })
     }
-  };
+  }
 
-  const getUrlsClicked = async id => {
-    setLoading();
+  const getUrlsClicked = async (id) => {
+    setLoading()
 
     try {
-      const res = await axios.get(`${apiLink}/clicked/${id}`);
+      const res = await axios.get(`${apiLink}/clicked/${id}`)
 
       dispatch({
         type: GET_CLICKED,
-        payload: res.data
-      });
+        payload: res.data,
+      })
     } catch (err) {
       dispatch({
         type: REPORTS_ERROR,
-        payload: 'There was a clicked error'
-      });
+        payload: 'There was a clicked error',
+      })
     }
-  };
+  }
 
   // Set Loading
-  const setLoading = () => dispatch({ type: SET_LOADING });
+  const setLoading = () => dispatch({ type: SET_LOADING })
 
   return (
     <MailchimpContext.Provider
@@ -121,12 +121,12 @@ const MailchimpState = props => {
         getReports,
         getReport,
         getCampaign,
-        getUrlsClicked
+        getUrlsClicked,
       }}
     >
       {props.children}
     </MailchimpContext.Provider>
-  );
-};
+  )
+}
 
-export default MailchimpState;
+export default MailchimpState
