@@ -1,24 +1,21 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import AuthContext from '../../context/auth/authContext'
-
-// For use when icon and user are active
-// const Navbar = ({ title, icon }) => {
-// const { isAuthenticated, logout, user } = authContext
+import { useAuth, logout } from '../../context/auth/AuthState'
 
 const Navbar = ({ title }) => {
-  const authContext = useContext(AuthContext)
-
-  const { isAuthenticated, logout } = authContext
+  const [authState, authDispatch] = useAuth()
+  const { isAuthenticated, user } = authState
 
   const onLogout = () => {
-    logout()
+    logout(authDispatch)
   }
 
   const authLinks = (
     <Fragment>
-      {/* <li>Hello {user && user.name}</li> */}
+      <li>
+        <Link to='/updating'>Saved</Link>
+      </li>
       <li>
         <Link to='/updating'>Actual</Link>
       </li>
@@ -50,7 +47,11 @@ const Navbar = ({ title }) => {
 
   return (
     <div className='navbar bg-primary'>
-      {title}
+      {isAuthenticated ? (
+        <Link to='/about'>{user && user.name} - MailChamp 2023</Link>
+      ) : (
+        <Link to='/about'>MailChamp 2023</Link>
+      )}
       <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
     </div>
   )
@@ -62,7 +63,7 @@ Navbar.propTypes = {
 }
 
 Navbar.defaultProps = {
-  title: 'MailChamp',
+  title: 'MailChamp 2023',
   icon: 'fas fa-id-card-alt',
 }
 

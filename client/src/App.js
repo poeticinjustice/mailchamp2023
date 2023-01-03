@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import Alert from './components/layout/Alert'
 import Home from './components/pages/Home'
@@ -21,44 +21,45 @@ import MailchimpState from './context/mailchimp/MailchimpState'
 import AlertState from './context/alert/AlertState'
 import './App.css'
 
-import setAuthToken from './utils/setAuthToken'
-import './App.css'
-
-if (localStorage.token) {
-  setAuthToken(localStorage.token)
-}
-
 const App = () => {
   return (
     <AuthState>
       <MailchimpState>
         <AlertState>
-          <Router>
+          <BrowserRouter>
             <Fragment>
               <div className='App'>
                 <Navbar />
                 <div className='container'>
                   <Alert />
-                  <Switch>
-                    <PrivateRoute exact path='/' component={Home} />
-                    <PrivateRoute exact path='/updating' component={Updating} />
-                    <PrivateRoute exact path='/report/:id' component={Report} />
-                    <PrivateRoute
-                      exact
-                      path='/report2/:id'
-                      component={Report2}
+                  <Routes>
+                    <Route
+                      path='/'
+                      element={<PrivateRoute component={Home} />}
                     />
-                    <Route exact path='/about' component={About} />
-                    <Route exact path='/test' component={Test} />
-                    <Route exact path='/testing/:id' component={TestReport} />
-                    <Route exact path='/register' component={Register} />
-                    <Route exact path='/login' component={Login} />
-                    <Route component={NotFound} />
-                  </Switch>
+                    <Route
+                      path='/updating'
+                      element={<PrivateRoute component={Updating} />}
+                    />
+                    <Route
+                      path='/report/:id'
+                      element={<PrivateRoute component={Report} />}
+                    />
+                    <Route
+                      path='/report2/:id'
+                      element={<PrivateRoute component={Report2} />}
+                    />
+                    <Route path='about' element={<About />} />
+                    <Route path='/test' element={<Test />} />
+                    <Route path='/testing/:id' element={<TestReport />} />
+                    <Route path='/register' element={<Register />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route element={NotFound} />
+                  </Routes>
                 </div>
               </div>
             </Fragment>
-          </Router>
+          </BrowserRouter>
         </AlertState>
       </MailchimpState>
     </AuthState>

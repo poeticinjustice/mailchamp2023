@@ -1,9 +1,10 @@
 import React, { Fragment, useEffect, useContext } from 'react'
 import Spinner from '../layout/Spinner'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import MailchimpContext from '../../context/mailchimp/mailchimpContext'
 
-const Report2 = ({ match }) => {
+const Report2 = ({}) => {
+  const { id } = useParams()
   const mailchimpContext = useContext(MailchimpContext)
   const {
     getReport,
@@ -16,9 +17,9 @@ const Report2 = ({ match }) => {
   } = mailchimpContext
 
   useEffect(() => {
-    getReport(match.params.id)
-    getCampaign(match.params.id)
-    getUrlsClicked(match.params.id)
+    getReport(id)
+    getCampaign(id)
+    getUrlsClicked(id)
     // eslint-disable-next-line
   }, [])
 
@@ -196,12 +197,12 @@ const Report2 = ({ match }) => {
               </Link>
             </td>
             <td>
-              <Link to={`/report/${match.params.id}`} className='btn btn-light'>
+              <Link to={`/report/${id}`} className='btn btn-light'>
                 Original Report, including LSA/PLASA
               </Link>
             </td>
             <td>
-              <Link to={`/report/${match.params.id}`} className='btn btn-light'>
+              <Link to={`/report/${id}`} className='btn btn-light'>
                 Original Report List
               </Link>
             </td>
