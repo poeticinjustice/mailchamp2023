@@ -14,7 +14,7 @@ const Navbar = ({ title }) => {
   const authLinks = (
     <Fragment>
       <li>
-        <Link to='/updating'>Saved</Link>
+        <Link to='/saved'>Saved</Link>
       </li>
       <li>
         <Link to='/updating'>Actual</Link>

@@ -122,6 +122,7 @@ const Report2 = ({}) => {
 
   let urls2 = combined2.map((urlClicked) => (
     <tr key={urlClicked.url}>
+      {console.log(urlClicked.total_clicks)}
       <td style={tdStyle5}>
         <a href={urlClicked.url} target='_blank' rel='noopener noreferrer'>
           {urlClicked.url}
@@ -192,18 +193,13 @@ const Report2 = ({}) => {
         <tbody>
           <tr>
             <td>
-              <Link to='/updating' className='btn btn-light'>
-                Back to Report List (updating)
+              <Link to='/about' className='btn btn-light'>
+                Save
               </Link>
             </td>
             <td>
               <Link to={`/report/${id}`} className='btn btn-light'>
                 Original Report, including LSA/PLASA
-              </Link>
-            </td>
-            <td>
-              <Link to={`/report/${id}`} className='btn btn-light'>
-                Original Report List
               </Link>
             </td>
           </tr>

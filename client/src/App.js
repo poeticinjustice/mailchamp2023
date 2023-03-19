@@ -16,6 +16,8 @@ import AuthState from './context/auth/AuthState'
 import Test from './components/pages/Test'
 import TestReport from './components/reports/TestReport'
 
+import FullTest from './components/pages/FullTest'
+
 import NotFound from './components/pages/NotFound'
 import MailchimpState from './context/mailchimp/MailchimpState'
 import AlertState from './context/alert/AlertState'
@@ -54,6 +56,7 @@ const App = () => {
                     <Route path='/testing/:id' element={<TestReport />} />
                     <Route path='/register' element={<Register />} />
                     <Route path='/login' element={<Login />} />
+                    <Route path='/fulltest' element={<FullTest />} />
                     <Route element={NotFound} />
                   </Routes>
                 </div>
