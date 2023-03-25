@@ -122,7 +122,6 @@ const Report2 = ({}) => {
 
   let urls2 = combined2.map((urlClicked) => (
     <tr key={urlClicked.url}>
-      {console.log(urlClicked.total_clicks)}
       <td style={tdStyle5}>
         <a href={urlClicked.url} target='_blank' rel='noopener noreferrer'>
           {urlClicked.url}
