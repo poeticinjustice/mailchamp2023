@@ -1,7 +1,13 @@
 // update for test
-const express = require('express')
-const connectDB = require('./config/db')
-const path = require('path')
+import express from 'express'
+import connectDB from './config/db.js'
+import path from 'path'
+
+import auth from './routes/auth.js'
+import report from './routes/report.js'
+import reports from './routes/reports.js'
+import transfer from './routes/transfer.js'
+import users from './routes/users.js'
 
 const app = express()
 
@@ -12,10 +18,12 @@ connectDB()
 app.use(express.json({ extended: false }))
 
 // Define Routes
-app.use('/api/users', require('./routes/users'))
-app.use('/api/auth', require('./routes/auth'))
-app.use('/api', require('./routes/reports'))
-app.use('/api', require('./routes/report'))
+
+app.use('/api/users', users)
+app.use('/api/auth', auth)
+app.use('/api', report)
+app.use('/api', reports)
+app.use('/api', transfer)
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {

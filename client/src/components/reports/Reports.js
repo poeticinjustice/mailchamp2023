@@ -26,7 +26,7 @@ const Reports = () => {
               <th>Subject</th>
               <th>Date</th>
               <th>Sent</th>
-              <th>No LSA</th>
+              {/* <th>No LSA</th> */}
               <th>Inc LSA</th>
             </tr>
           </thead>

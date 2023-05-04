@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-import  from 'axios'
+import axios from 'axios'
 import MailchimpContext from './mailchimpContext'
 import MailchimpReducer from './mailchimpReducer'
 import {

@@ -1,12 +1,13 @@
-const express = require('express')
-const request = require('superagent')
-const cors = require('cors')
+import express from 'express'
+import request from 'superagent'
+import cors from 'cors'
 const router = express.Router()
 
 router.use(express.json())
 router.use(cors())
 
-require('dotenv').config()
+import dotenv from 'dotenv'
+dotenv.config()
 
 const apiUrl = process.env.MC_API_URL
 const apiToken = process.env.MC_ACCESS_TOKEN
@@ -24,4 +25,4 @@ router.get('/reports', function (req, res) {
     })
 })
 
-module.exports = router
+export default router

@@ -14,11 +14,11 @@ const ReportListItem = ({
         <td>{subject_line}</td>
         <td>{sendDate}</td>
         <td>{emails_sent.toLocaleString()}</td>
-        <td>
+        {/* <td>
           <Link to={`/report2/${id}`} className='btn btn-dark btn-sm my-1'>
             Get
           </Link>
-        </td>
+        </td> */}
         <td>
           <Link to={`/report/${id}`} className='btn btn-dark btn-sm my-1'>
             Get

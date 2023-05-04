@@ -170,6 +170,11 @@ const Report = ({}) => {
           Link to campaign
         </a>
       </div>
+      <div>
+        <Link to={`/report/${id}`} className='btn btn-dark btn-sm my-1'>
+          Save to MongoDB
+        </Link>
+      </div>
       <br />
       <br />
       <table>

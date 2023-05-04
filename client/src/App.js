@@ -17,6 +17,7 @@ import Test from './components/pages/Test'
 import TestReport from './components/reports/TestReport'
 
 import FullTest from './components/pages/FullTest'
+import Saved from './components/reports/Saved'
 
 import NotFound from './components/pages/NotFound'
 import MailchimpState from './context/mailchimp/MailchimpState'
@@ -57,6 +58,7 @@ const App = () => {
                     <Route path='/register' element={<Register />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/fulltest' element={<FullTest />} />
+                    <Route path='/saved' element={<Saved />} />
                     <Route element={NotFound} />
                   </Routes>
                 </div>
